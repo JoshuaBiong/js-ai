@@ -39,7 +39,6 @@ function generateUniqueId() {
     const timestamp = Date.now()
     const randomNumber = Math.random()
     const hexadecimalString = randomNumber.toString(16)
-
     return `id-${timestamp} -${hexadecimalString}`
 }
 
@@ -66,7 +65,6 @@ const handleSubmit = async(e) => {
     e.preventDefault()
 
     const data = new FormData(form)
-
 
     //user chat stripe
     chatContainer.innerHTML += chatStripe(false, data.get('prompt'))

@@ -10,7 +10,7 @@ import { OpenAI } from "openai";
 dotenv.config()
 
 // const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY, })
+const openai = new OpenAI({ apiKey: "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" })
 
 // const openai = new OpenAIApi(configuration)
 const app = express()
