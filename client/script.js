@@ -27,7 +27,7 @@ function typeText(elemet, text) {
 
     let interval = setInterval(() => {
         if (index < text.length) {
-            element.innerHTML += text.chartAt(index)
+            element.innerHTML += text.charAt(index)
             index++
         } else {
             clearInterval(interval)
@@ -77,9 +77,38 @@ const handleSubmit = async(e) => {
 
     chatContainer.scrollTop = chatContainer.scrollHeight
 
-    const messageDiv = document.getElementById(uniqueId)
+    let messageDiv = document.getElementById(uniqueId)
 
     loading(messageDiv)
+
+    const response = await fetch('http://localhost:5000', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application.json'
+        },
+
+        body: JSON.stringify({
+            prompt: data.get('prompt')
+        })
+    })
+
+    clearInterval(loadInterval)
+
+    messageDiv.innerHTML = ""
+
+    if (response.ok) {
+        const data = awaitresponse.json()
+        const parseData = data.bot.trim()
+
+        typeText(messageDiv, parseData)
+
+    } else {
+        const err = await response.json()
+        messageDiv = ""
+
+        alert(err)
+    }
+
 }
 
 form.addEventListener('submit', handleSubmit);

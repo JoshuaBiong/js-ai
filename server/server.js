@@ -10,7 +10,7 @@ import { OpenAI } from "openai";
 dotenv.config()
 
 // const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
-const openai = new OpenAI({ apiKey: "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" })
+const openai = new OpenAI({ apiKey: "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" })
 
 // const openai = new OpenAIApi(configuration)
 const app = express()
@@ -30,7 +30,7 @@ app.post('/', async(req, res) => {
 
         const response = await openai.completions.create({
             model: "text-davinci-003",
-            prompt: "",
+            prompt: `${prompt}`,
             temperature: 0,
             max_tokens: 3000,
             top_p: 1,
@@ -38,8 +38,8 @@ app.post('/', async(req, res) => {
             presence_penalty: 0,
         });
 
-        res.status(200).semd({
-            bot: response.data.choice[0].text
+        res.status(200).send({
+            bot: response.data.choices[0].text
         })
     } catch (error) {
         console.log(error)
@@ -47,4 +47,4 @@ app.post('/', async(req, res) => {
     }
 })
 
-app.listeners(5000, () => console.log("Server is running on port http://localhost:5000"))
+app.listen(5000, () => console.log("Server is running on port http://localhost:5000"))
